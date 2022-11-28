@@ -208,8 +208,23 @@ class ResponseViewer (private val platformName:String): ViewModel(){
         //        debug output (comment if not necessary)
         //        Log.e("TAAAAG", res_list.toString())
     }
-
     fun getVKList(): MutableList<MutableList<String>> {
-        return vkResList
+        val vkResList_: MutableList<MutableList<String>> = ArrayList()
+        val numbers: IntArray = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
+        for(i in 0..10) {
+            var flag: Boolean = true
+            var rnds = (0..this.vkResList.size).random()
+            while (flag){
+                for(j in 0..10) {
+                    if (rnds == numbers[j]){
+                        rnds = (0..this.vkResList.size).random()
+                        break
+                    }
+                }
+                flag = false
+            }
+            vkResList_.add(vkResList[rnds])
+        }
+        return vkResList_
     }
 }

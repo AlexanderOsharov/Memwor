@@ -1,9 +1,11 @@
 package com.example.kotlinprojecttest2
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.kotlinprojecttest2.databinding.ActivityMainBinding
@@ -11,7 +13,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainActivity : AppCompatActivity() {
-
+    var dialog: Dialog? = null
+    var btnAboutUs: Button? = null
     // This will be connected with fragListTitles || platformName - Vk (test platform)
     private val viewer = ResponseViewer("vk")
 
@@ -33,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        btnAboutUs = findViewById<Button>(R.id.aboutUs)
         val adapter = VpAdapter(this, fragList)
         binding.vp2.adapter = adapter
         TabLayoutMediator(binding.ourtablayout, binding.vp2){
@@ -40,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         }.attach()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
+        dialog = Dialog(this)
+        btnAboutUs!!.setOnClickListener { showDialog() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,10 +78,12 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun vkParseOnClick(view: View){
-        setContentView(R.layout.activity_main)
-        //TODO(Different platform`s parsing from platform names (Reddit, Telegram))
-        viewer.returnUrls()
+    fun showDialog() {
+        val btnClose: Button
+        dialog?.setContentView(R.layout.about_us_pop_up)
+        dialog!!.show()
+        btnClose = dialog!!.findViewById(R.id.close)
+        btnClose.setOnClickListener { dialog!!.dismiss() }
     }
 }
 
