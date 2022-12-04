@@ -36,17 +36,14 @@ class Adapter(var context_: Context, arraylist: MutableList<MutableList<String>>
         Picasso.with(context).load(imageUrl).into(holder.imageView)
         holder.itemView.category.text = "Школьный медиаконтент"
         holder.itemView.author.text = "Мемы лицея 1523"
-        holder.itemView.meme_text.text = this.arraylist[position][1]
-        holder.category.text = "Школьный медиаконтент"
-        holder.author.text = "Мемы лицея 1523"
-        holder.meme_text.text = this.arraylist[position][1]
+        if (this.arraylist[position][0] != "There is no text for this post") holder.itemView.meme_text.text = this.arraylist[position][0]
         holder.cardView.setOnClickListener {
             val intent = Intent(context, Detailed::class.java)
             intent.putExtra("category", "Мемы лицея 1523")
             intent.putExtra("author", "Мемы лицея 1523")
-            intent.putExtra("desc", this.arraylist[position][0])
+            //intent.putExtra("desc", this.arraylist[position][0])
             intent.putExtra("imageUrl", this.arraylist[position][1])
-            intent.putExtra("url", this.arraylist[position][0])
+            if (this.arraylist[position][0] != "There is no text for this post") intent.putExtra("url", this.arraylist[position][0])
             context?.startActivity(intent)
         }
 
@@ -93,11 +90,11 @@ class Adapter(var context_: Context, arraylist: MutableList<MutableList<String>>
         var cardView: CardView
 
         init {
-            category = itemView.findViewById(com.example.kotlinprojecttest2.R.id.category)
-            author = itemView.findViewById(com.example.kotlinprojecttest2.R.id.author)
-            meme_text = itemView.findViewById(com.example.kotlinprojecttest2.R.id.meme_text)
-            imageView = itemView.findViewById(com.example.kotlinprojecttest2.R.id.image)
-            cardView = itemView.findViewById(com.example.kotlinprojecttest2.R.id.cardView)
+            category = itemView.findViewById(R.id.category)
+            author = itemView.findViewById(R.id.author)
+            meme_text = itemView.findViewById(R.id.meme_text)
+            imageView = itemView.findViewById(R.id.image)
+            cardView = itemView.findViewById(R.id.cardView_main)
         }
     }
 

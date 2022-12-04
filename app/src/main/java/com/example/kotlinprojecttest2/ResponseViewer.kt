@@ -17,6 +17,7 @@ class ResponseViewer (private val platformName:String): ViewModel(){
     private val vkResList: MutableList<MutableList<String>> = ArrayList()
     lateinit var questApi: QuestApi
 
+
     fun returnUrls() {
         if (platformName == "vk") {
             vkConfigureRetrofit()
@@ -121,7 +122,10 @@ class ResponseViewer (private val platformName:String): ViewModel(){
             if (it.marked_as_ads == 0) {
                 val inter_list: MutableList<String> = ArrayList()
                 // Checking for empty text
-                inter_list.add(it.text)
+                //inter_list.add(it.text)
+                var text = it.text
+                if (it.text == null) text = "There is no text for this post"
+                inter_list.add(text)
                 // Adding existing urls to intermediate list
                 it.attachments?.forEach {
                     //                    if (it.type == "photo"){
@@ -215,7 +219,7 @@ class ResponseViewer (private val platformName:String): ViewModel(){
             var flag: Boolean = true
             var rnds = (0..this.vkResList.size).random()
             while (flag){
-                for(j in 0..10) {
+                for(j in 0..9) {
                     if (rnds == numbers[j]){
                         rnds = (0..this.vkResList.size).random()
                         break

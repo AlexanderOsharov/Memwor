@@ -10,12 +10,18 @@
         android:layout_margin="10dp"
         app:cardElevation="4dp"
         app:cardCornerRadius="40dp"
-        android:id="@+id/cardView">
+        android:id="@+id/cardView_main">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:padding="10dp">
+
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:id="@+id/loader"/>
 
             <ImageView
                 android:id="@+id/image"

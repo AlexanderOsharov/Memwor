@@ -40,6 +40,7 @@ class Vk : Fragment() {
         mContext= requireContext()
         swipeRefreshLayout = view?.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
         recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        articles.returnUrls()
         vkResList = articles.getVKList()
 
 /*
@@ -56,8 +57,10 @@ class Vk : Fragment() {
 
 
         swipeRefreshLayout!!.setOnRefreshListener {
+            swipeRefreshLayout?.isRefreshing = true
             vkResList = articles.getVKList()
             adapter = Adapter(mContext, vkResList)
+            recyclerView?.adapter = adapter
             swipeRefreshLayout?.isRefreshing = false
         }
 
